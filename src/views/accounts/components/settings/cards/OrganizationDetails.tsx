@@ -9,7 +9,7 @@ import {selectUserAuth, selectUserToken} from '@stores/auth/authSlector'
 import get from '@lib/get'
 import put from '@lib/put'
 import post from '@lib/post'
-import __CONSTANTS__ from '__CONSTANTS__/index'
+import {ASSETS_URL} from '__CONSTANTS__/index'
 
 const organizationDetailsSchema = Yup.object().shape({
   name: Yup.string().required('Company Name is required'),
@@ -43,8 +43,6 @@ const orgaizationDefault = {
 }
 
 const OrganizationDetails: React.FC = () => {
-  const {ASSETS_URL} = __CONSTANTS__
-
   const userAuth = useSelector(selectUserAuth)
   const userToken = useSelector(selectUserToken)
 

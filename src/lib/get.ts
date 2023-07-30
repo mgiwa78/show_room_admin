@@ -1,10 +1,9 @@
 import axios from 'axios'
-import __CONSTANTS__ from '__CONSTANTS__/index'
+import {API_URL} from '__CONSTANTS__/index'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
-const {API_URL} = __CONSTANTS__
 
 const get = async (path: string, authToken = '') => {
   try {

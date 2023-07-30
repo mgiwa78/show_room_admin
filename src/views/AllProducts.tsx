@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {toAbsoluteUrl} from '@helpers/AssetHelpers'
 import {KTIcon} from '@helpers/index'
 import get from '@lib/get'
-import __CONSTANTS__ from '__CONSTANTS__/index'
+import {ASSETS_URL} from '__CONSTANTS__/index'
 import {formatDateToWords} from '@helpers/formateDate'
 import {Link, Navigate} from 'react-router-dom'
 import type Product from '../types/Product'
@@ -15,7 +15,6 @@ type Props = {
 }
 
 const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
-  const {ASSETS_URL} = __CONSTANTS__
   const [products, setProducts] = useState([])
   const userToken = useSelector(selectUserToken)
 
