@@ -12,7 +12,7 @@ import {ErrorsPage} from '../views/ErrorsPage'
 import {AuthPage} from '../views/auth/Auth'
 import {App} from '../App'
 import {useSelector} from 'react-redux'
-import {selectUserAuth} from '@stores/auth/authSlector'
+import {selectUserAuth} from '../stores/auth/authSlector'
 import Logout from '../services/auth/Logout'
 
 /**
