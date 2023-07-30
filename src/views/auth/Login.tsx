@@ -64,31 +64,7 @@ export function Login() {
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
         <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
       </div>
-      {/* begin::Heading */}
 
-      {/* begin::Login options */}
-      <div className='row g-3 mb-9'>
-        {/* begin::Col */}
-        <div className='col-md-12'>
-          {/* begin::Google link */}
-          <a
-            href='#'
-            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
-          >
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-              className='h-15px me-3'
-            />
-            Sign in with Google
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-      </div>
-      {/* end::Login options */}
-
-      {/* begin::Separator */}
       <div className='separator separator-content my-14'>
         <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
       </div>
