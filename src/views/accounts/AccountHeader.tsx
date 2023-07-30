@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react'
 import {KTIcon, toAbsoluteUrl} from '@helpers/index'
 import {Link} from 'react-router-dom'
-import {Dropdown1} from '@components/partials/content/dropdown/Dropdown1'
 import {useLocation} from 'react-router'
 import {useSelector} from 'react-redux'
 import {selectUserAuth, selectUserToken} from '@stores/auth/authSlector'
