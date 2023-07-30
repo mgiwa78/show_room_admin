@@ -1,10 +1,18 @@
 import {PageTitle} from '@layouts/core'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {StatisticsWidget5} from './partials/widgets/StatisticsWidget5'
 import {MixedWidget1} from './partials/widgets/MixedWidget1'
 import RecentImpressions from './RecentImpressions'
+import get from '@lib/get'
+import {useSelector} from 'react-redux'
+import {selectUserToken} from '@stores/auth/authSlector'
 
 const AdminDasboard = () => {
+  const userToken = useSelector(selectUserToken)
+  const [productsCount, setProductCount] = useState(0)
+  const [categoriesCount, setCategorieCount] = useState(0)
+  const [usersCount, setUsersCount] = useState(0)
+
   const usersSummary = [
     {
       colour: 'danger',
@@ -19,6 +27,26 @@ const AdminDasboard = () => {
       ],
     },
   ]
+
+  const fetchDashboardData = async () => {
+    const products = await get('products', userToken)
+    const categories = await get('categories', userToken)
+    const users = await get('users', userToken)
+
+    if (products) {
+      setProductCount(products.length)
+    }
+    if (categories) {
+      setCategorieCount(categories.length)
+    }
+    if (users) {
+      setUsersCount(users.length)
+    }
+  }
+
+  useEffect(() => {
+    fetchDashboardData()
+  }, [])
   return (
     <>
       <PageTitle>Organization Admin</PageTitle>
@@ -30,7 +58,7 @@ const AdminDasboard = () => {
               svgIcon='user'
               color='danger'
               iconColor='white'
-              title='32'
+              title={`${productsCount}`}
               titleColor='white'
               description='Products'
               descriptionColor='white'
@@ -43,7 +71,7 @@ const AdminDasboard = () => {
               svgIcon='cheque'
               color='primary'
               iconColor='white'
-              title='4'
+              title={`${categoriesCount}`}
               titleColor='white'
               description='Categories'
               descriptionColor='white'
@@ -56,9 +84,9 @@ const AdminDasboard = () => {
               svgIcon='chart-simple-3'
               color='success'
               iconColor='white'
-              title='12'
+              title={`${usersCount}`}
               titleColor='white'
-              description='Active Rooms'
+              description='Users'
               descriptionColor='white'
             />
           </div>

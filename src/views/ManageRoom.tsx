@@ -1,5 +1,5 @@
 import {PageTitle} from '@layouts/core'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup'
 import '../assets/sass/styles/file.css'
 import {StatisticsWidget5} from '../components/partials/widgets/StatisticsWidget5'
@@ -8,6 +8,9 @@ import {useFormik} from 'formik'
 import post from '@lib/post'
 import {useSelector} from 'react-redux'
 import {selectUserAuth, selectUserToken} from '@stores/auth/authSlector'
+import get from '@lib/get'
+import {toAbsoluteUrl} from '@helpers/AssetHelpers'
+import {ASSETS_URL} from '__CONSTANTS__/index'
 
 const initialValues = {
   roomTitle: '',
@@ -26,6 +29,8 @@ const ManageRoomSchema = Yup.object().shape({
 const ManageRoom = () => {
   const userToken = useSelector(selectUserToken)
   const [loading, setLoading] = useState(false)
+
+  const [roomBanner, setRoomBanner] = useState([])
 
   const formik = useFormik({
     initialValues,
@@ -52,7 +57,7 @@ const ManageRoom = () => {
       const roomID = room.data._id
       formData.append('roomID', roomID)
       post(`rooms/image/${roomID}`, formData, userToken)
-
+      handleFetchRoomData()
       formik.resetForm()
       setSubmitting(false)
       setLoading(false)
@@ -77,6 +82,19 @@ const ManageRoom = () => {
     }
   }
 
+  const handleFetchRoomData = async () => {
+    const data = await get('rooms', userToken)
+    if (data) {
+      formik.setFieldValue('roomTitle', data.title)
+      formik.setFieldValue('roomDescription', data.description)
+      formik.setFieldValue('roomBannerFile', data.roomBanner)
+      setRoomBanner(data.roomBanner)
+    }
+  }
+
+  useEffect(() => {
+    handleFetchRoomData()
+  }, [])
   return (
     <>
       <div className='card'>
@@ -88,6 +106,25 @@ const ManageRoom = () => {
         <div className='card-body '>
           <form onSubmit={formik.handleSubmit} id='kt_signin_change_email' className='form'>
             <div className='row mb-6'>
+              <div className='col-lg-12'>
+                <div className='fv-row mb-0'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Banner</label>
+                  <div className='col-lg-8'>
+                    <div
+                      className='image-input image-input-outline'
+                      data-kt-image-input='true'
+                      style={{backgroundImage: `url(${toAbsoluteUrl('/media/avatars/blank.png')})`}}
+                    >
+                      <div
+                        className='image-input-wrapper w-500px h-350px'
+                        style={{
+                          backgroundImage: `url(${ASSETS_URL + 'rooms/' + roomBanner})`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className='col-lg-6 mb-4 mb-lg-0'>
                 <div className='fv-row mb-0'>
                   <label htmlFor='roomTitle' className='form-label fs-6 fw-bolder mb-3'>

@@ -20,6 +20,7 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
 
   const handleFetchProducts = async () => {
     const data = await get('products', userToken)
+    console.log(data)
     if (data) {
       setProducts(data)
     }

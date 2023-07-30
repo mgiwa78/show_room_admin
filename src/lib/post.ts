@@ -17,6 +17,7 @@ const post = async (
         Authorization: 'Bearer ' + authToken,
       },
     })
+
     isPrompt &&
       MySwal.fire({
         text: 'Created Successfully',
