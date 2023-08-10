@@ -39,7 +39,7 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
           </span>
         </h3>
         <div className='card-toolbar'>
-          <Link to={'organization/categories/create'} className='btn btn-sm btn-light-primary'>
+          <Link to={'/organization/categories/create'} className='btn btn-sm btn-light-primary'>
             <KTIcon iconName='plus' className='fs-2' />
             Create Category
           </Link>
@@ -58,7 +58,7 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
                 <th className='ps-4 min-w-325px rounded-start'>Image</th>
                 <th className='min-w-200px'>Date Created</th>
                 <th className='min-w-150px'>Total</th>
-                <th className='min-w-200px text-end rounded-end'></th>
+                {/* <th className='min-w-200px text-end rounded-end'></th> */}
               </tr>
             </thead>
             {/* end::Table head */}
@@ -71,7 +71,7 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
                       <div className='d-flex align-items-center'>
                         <div className='symbol symbol-50px me-5'>
                           <img
-                            src={`${ASSETS_URL + 'categories/' + category?.categoryBanner}`}
+                            src={`${ASSETS_URL + category?.categoryBanner}`}
                             className=''
                             alt=''
                           />
@@ -94,9 +94,7 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
                       >
                         {formatDateToWords(category.createdAt)}
                       </a>
-                      <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        Rejected
-                      </span>
+                      <span className='text-muted fw-semibold text-muted d-block fs-7'></span>
                     </td>
                     <td>
                       <a
@@ -105,12 +103,12 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
                       >
                         Admin
                       </a>
-                      <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                      {/* <span className='text-muted fw-semibold text-muted d-block fs-7'>
                         {formatDateToWords(category.createdAt)}
-                      </span>
+                      </span> */}
                     </td>
 
-                    <td className='text-end'>
+                    {/* <td className='text-end'>
                       <a
                         href='#'
                         className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
@@ -129,7 +127,7 @@ const AllCategories: React.FC<Props> = ({className = 'danger'}) => {
                       >
                         <KTIcon iconName='trash' className='fs-3' />
                       </a>
-                    </td>
+                    </td> */}
                   </tr>
                 ))
               ) : (

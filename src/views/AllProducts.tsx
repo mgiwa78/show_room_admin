@@ -40,7 +40,7 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
           </span>
         </h3>
         <div className='card-toolbar'>
-          <Link to={'organization/products/create'} className='btn btn-sm btn-light-primary'>
+          <Link to={'/organization/products/create'} className='btn btn-sm btn-light-primary'>
             <KTIcon iconName='plus' className='fs-2' />
             Create Product
           </Link>
@@ -58,8 +58,7 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
                 <th className='ps-4 min-w-325px rounded-start'>Image</th>
                 <th className='min-w-125px'>Category</th>
                 <th className='min-w-200px'>Uploaded By</th>
-                <th className='min-w-150px'>Stock</th>
-                <th className='min-w-200px text-end rounded-end'></th>
+                {/* <th className='min-w-200px text-end rounded-end'></th> */}
               </tr>
             </thead>
             {/* end::Table head */}
@@ -72,7 +71,7 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
                       <div className='d-flex align-items-center'>
                         <div className='symbol symbol-50px me-5'>
                           <img
-                            src={`${ASSETS_URL + 'products/' + product?.profilePicture}`}
+                            src={`${ASSETS_URL + product?.profilePicture}`}
                             className=''
                             alt=''
                           />
@@ -89,31 +88,22 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
                     </td>
 
                     <td>
-                      <a
-                        href='#'
-                        className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'
-                      >
-                        {product.category ? product.category.name : 'No Category'}
-                      </a>
-                      <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        Rejected
+                      <span className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                        {product.category
+                          ? product.category.map((a) => a.name.toLocaleUpperCase())
+                          : 'No Category'}
                       </span>
                     </td>
                     <td>
-                      <a
-                        href='#'
-                        className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'
-                      >
-                        Admin
-                      </a>
-                      <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                      <span className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
                         {formatDateToWords(product.createdAt)}
                       </span>
+                      {/* <span className='text-muted fw-semibold text-muted d-block fs-7'></span> */}
                     </td>
-                    <td>
+                    {/* <td>
                       <span className='badge badge-light-primary fs-7 fw-semibold'>Approved</span>
-                    </td>
-                    <td className='text-end'>
+                    </td> */}
+                    {/* <td className='text-end'>
                       <a
                         href='#'
                         className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
@@ -132,7 +122,7 @@ const AllProduct: React.FC<Props> = ({className = 'danger'}) => {
                       >
                         <KTIcon iconName='trash' className='fs-3' />
                       </a>
-                    </td>
+                    </td> */}
                   </tr>
                 ))
               ) : (

@@ -62,6 +62,7 @@ const CreateCategory = () => {
       // formData.append('category', values.productCategory)
 
       formData.append('profilePicture', values.productProfileFile[0])
+
       for (let i = 0; i < values.productImagesFiles.length; i++) {
         formData.append('otherPictures', values.productImagesFiles[i])
       }
@@ -70,6 +71,7 @@ const CreateCategory = () => {
         name: values.productName,
         description: values.productDescription,
         category: values.productCategory,
+        price: values.productPrice,
       }
 
       const product = await post('products', data, userToken, false)
